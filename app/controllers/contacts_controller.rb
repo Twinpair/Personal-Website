@@ -9,9 +9,10 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
     if @contact.save
       ContactMailer.contact_message(@contact).deliver_now
-  		flash[:success] = "I have received your message. I will be in touch with you soon."
+  		flash[:success] = "Messaged has been sent"
       redirect_to "/#contact"
     else
+      @information = Information.first
       @slash = "/"
       render :new
     end
